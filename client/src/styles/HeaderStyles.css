@@ -1,0 +1,91 @@
+/* HeaderStyles.css */
+
+header {
+    padding: 10px 0;
+  }
+  
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  
+  .logo {
+    flex: 0 0 auto; /* Prevent logo from growing */
+    text-align: center; /* Center the logo */
+  }
+  
+  .logo img {
+    width: 25px;
+    height: auto;
+  }
+  
+  .nav-menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+  
+  .nav-item {
+    margin-right: 20px;
+  }
+  
+  .active-nav-item {
+    color: #fff;
+  }
+  
+  .burger {
+    display: none; /* Hide by default */
+  }
+  
+  @media screen and (max-width: 1000px) {
+    .header {
+      height: 4rem;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 100;
+      padding-right: 1rem;
+    }
+  
+   header h1.active {
+      color: #3a2e39;
+    }
+  
+    .nav-menu {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100vh;
+      position: absolute;
+      top: 4rem;
+      left: -100%;
+      z-index: 100;
+      transition: all 0.5s ease;
+    }
+  
+    .nav-menu.active {
+      background: #f1eedd;
+      left: 0;
+      transition: all 0.5s ease;
+    }
+  
+    .nav-menu li a {
+      font-size: 1.5rem;
+      color: black;
+    }
+  
+    .burger {
+      display: initial;
+    }
+  
+    .nav-title h1 {
+      font-size: 1.5rem;
+    }
+  }
+  
+  
