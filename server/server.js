@@ -1,30 +1,22 @@
-const express = require("express");
-const db = require("./config/connection");
-const path = require("path");
+const express = require('express');
+const dotenv = require('dotenv');
+const morgan = require('morgan');
+const cors = require('cors');
+const mongoose = require('mongoose');
+
+const router = require('./controllers/index.js');
+
+dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3001;
 
-const startServer = async () => {
-  app.use(express.json());
-  app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(cors());
+app.use(morgan('tiny'));
 
-  app.use(require("./controllers"));
+app.use(router);
 
-  if (process.env.NODE_ENV === "production") {
-    app.use(express.static(path.join(__dirname, "../client/dist")));
-
-    app.get("*", (req, res) => {
-      res.sendFile(path.join(__dirname, "../client/dist/index.html"));
-    });
-  }
-
-  db.once("open", () => {
-    app.listen(PORT, () => {
-      console.log(`API server running on port ${PORT}!`);
-      console.log(`API URL: http://localhost:${PORT}/api`);
-    });
-  });
-};
-
-startServer();
+mongoose.connect(process.env.MONGODB_URI).then(() => {
+  console.log('starting on port 8080');
+  app.listen(8080);
+})
