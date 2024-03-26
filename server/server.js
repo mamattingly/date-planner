@@ -3,6 +3,7 @@ const dotenv = require("dotenv");
 const morgan = require("morgan");
 const cors = require("cors");
 const mongoose = require("mongoose");
+const path = require("path");
 
 const PORT = process.env.PORT || 3001;
 
