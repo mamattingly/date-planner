@@ -4,6 +4,8 @@ const morgan = require('morgan');
 const cors = require('cors');
 const mongoose = require('mongoose');
 
+const PORT = process.env.PORT || 3001;
+
 const router = require('./controllers/index.js');
 
 dotenv.config();
@@ -17,6 +19,6 @@ app.use(morgan('tiny'));
 app.use(router);
 
 mongoose.connect(process.env.MONGODB_URI).then(() => {
-  console.log('starting on port 8080');
-  app.listen(8080);
+  console.log(`starting on port ${PORT}`);
+  app.listen(PORT);
 })
