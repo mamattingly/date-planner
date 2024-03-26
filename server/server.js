@@ -18,6 +18,8 @@ app.use(morgan('tiny'));
 
 app.use(router);
 
+app.use('/', express.static(path.join(__dirname, '/client/build')));
+
 mongoose.connect(process.env.MONGODB_URI).then(() => {
   console.log(`starting on port ${PORT}`);
   app.listen(PORT);
