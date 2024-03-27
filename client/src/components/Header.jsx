@@ -19,7 +19,7 @@ export default function Header() {
       <nav>
         <div className="logo">
           <Link to="/">
-            <img src={logo} alt="logo" />
+            <h1>Erin's Date Planner</h1>
           </Link>
         </div>
         <ul className={burger ? "nav-menu active" : "nav-menu"}>
@@ -44,9 +44,9 @@ export default function Header() {
         </ul>
         <div className="burger" onClick={toggleBurger}>
           {burger ? (
-            <IoCloseOutline size={25} color={"#fff"} />
+            <IoCloseOutline size={35} color={"#fff"} />
           ) : (
-            <IoMenuOutline size={25} color={"#fff"} />
+            <IoMenuOutline size={35} color={"#fff"} />
           )}
         </div>
       </nav>
