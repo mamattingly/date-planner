@@ -1,16 +1,15 @@
 const Place = require('../models/Place');
 const data = require('./data.json');
-const db = require('../config/connection');
+const mongoose = require('mongoose');
 require('dotenv').config();
 
-db.once('open', async () => {
+mongoose.connect(process.env.MONGODB_URI).then(async () => {
     try {
-        const mode = process.env.MODE !== 'dev' ? 'production' : 'development'
         await Place.deleteMany({});
         await Place.insertMany(data);
-        console.log(`Data successfully seeded to ${mode} database.`);
-        await db.close();
-        console.log(`Connection closed to ${mode} database.`)
+        console.log(`Data successfully seeded to database.`);
+        await mongoose.connection.close();
+        console.log(`Connection closed to database.`)
     } catch (err) {
         console.error(err);
     }
