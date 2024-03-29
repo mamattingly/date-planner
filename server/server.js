@@ -3,6 +3,7 @@ const dotenv = require("dotenv");
 const morgan = require("morgan");
 const cors = require("cors");
 const mongoose = require("mongoose");
+const { authMiddleware } = require("./utils/auth");
 const path = require("path");
 
 const PORT = process.env.PORT || 8080;
@@ -16,6 +17,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 app.use(morgan("tiny"));
+
 
 app.use(router);
 
