@@ -1,12 +1,12 @@
 import decode from 'jwt-decode';
-import { useDispatch, useSelector } from 'react-redux';
-import { login, logout } from './redux/actions';
+import { SIGN_IN, SIGN_OUT } from './redux/actions';
 
-const  AuthService {
-    const dispatch = useDispatch();
-    const token = useSelector((state) => state.auth.token);
+class AuthService {
+    constructor(dispatch) {
+        this.dispatch = dispatch;
+    }
 
-    getProfile() {
+    getProfile = () => {
         const token = this.getToken();
         if (token) {
             return decode(token);
@@ -14,12 +14,12 @@ const  AuthService {
         return null;
     }
 
-    loggedIn() {
+    loggedIn = () => {
         const token = this.getToken();
         return token && !this.isTokenExpired(token);
     }
 
-    isTokenExpired(token) {
+    isTokenExpired = (token) => {
         try {
             const decoded = decode(token);
             return decoded.exp < Date.now() / 1000;
@@ -29,7 +29,7 @@ const  AuthService {
         }
     }
 
-    getToken() {
+    getToken = () => {
         const token = localStorage.getItem('id_token');
         if (token && !this.isTokenExpired(token)) {
             return token;
@@ -38,15 +38,15 @@ const  AuthService {
         return null;
     }
 
-    login(idToken) {
-        localStorage.setItem('id_token', idToken);
+    login = (idToken) => {
+        this.dispatch(SIGN_IN(idToken));
         window.location.assign('/');
     }
 
-    logout() {
-        localStorage.removeItem('id_token');
+    logout = () => {
+        this.dispatch(SIGN_OUT());
         window.location.assign('/');
     }
 }
 
-export default new AuthService();
+export default AuthService;
