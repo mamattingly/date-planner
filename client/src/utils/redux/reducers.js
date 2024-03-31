@@ -9,7 +9,8 @@ export const initialState = {
 export const reducer = (state = initialState, action) => { 
     switch (action.type) {
         case SIGN_IN:
-            localStorage.setItem('id_token', action.payload.token);
+            localStorage.removeItem('id_token');
+            localStorage.setItem('id_token', action.payload);
             return {
                 ...state,
                 LOGGED_IN: true,

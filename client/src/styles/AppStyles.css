@@ -49,7 +49,11 @@ a {
 
 body {
 	font-family: "Archivo Narrow", sans-serif;
-	background-color: #281e32;
+	background-color: #622700;
+	background-image: url(../assets/2181.jpg);
+	background-size: cover;
+	background-attachment: fixed;
+	background-repeat: no-repeat;
 	color: #333;
 	font-size: 16px;
 	line-height: 1.6;

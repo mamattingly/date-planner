@@ -1,11 +1,33 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
+const activitySchema = new mongoose.Schema({
+    Name: { type: String, required: true },
+    Category: { type: String, required: true },
+    Cost: { type: String, required: true },
+    Address: { type: String, required: true },
+    Notes: { type: String }
+});
+
+const foodSchema = new mongoose.Schema({
+    Name: { type: String, required: true },
+    Category: { type: String, required: true },
+    Cost: { type: String, required: true },
+    Address: { type: String, required: true },
+    Notes: { type: String }
+});
+
+const dateSchema = new mongoose.Schema({
+    name: { type: String, required: true },
+    activity: activitySchema,
+    food: foodSchema,
+});
+
 const userSchema = new mongoose.Schema({
-    username: { type: String, required: true, unique: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    createdAt: { type: Date, default: Date.now }
+    createdAt: { type: Date, default: Date.now },
+    savedDates: [dateSchema]
 });
 
 userSchema.pre('save', async function(next) {

@@ -1,4 +1,4 @@
-import decode from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 import { SIGN_IN, SIGN_OUT } from './redux/actions';
 
 class AuthService {
@@ -9,7 +9,7 @@ class AuthService {
     getProfile = () => {
         const token = this.getToken();
         if (token) {
-            return decode(token);
+            return jwtDecode(token);
         }
         return null;
     }
@@ -21,7 +21,7 @@ class AuthService {
 
     isTokenExpired = (token) => {
         try {
-            const decoded = decode(token);
+            const decoded = jwtDecode(token);
             return decoded.exp < Date.now() / 1000;
         } catch (err) {
             console.error('Failed to decode token:', err);

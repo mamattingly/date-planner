@@ -3,12 +3,13 @@ import "../styles/HeaderStyles.css";
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { IoCloseOutline, IoMenuOutline } from "react-icons/io5";
-import logo from "../assets/logo.svg";
+import Authservice from "../utils/auth"; 
 
 export default function Header() {
   const { pathname } = useLocation();
   const [burger, setBurger] = useState(false);
   const toggleBurger = () => setBurger(!burger);
+  const authService = new Authservice();
 
   useEffect(() => {
     setBurger(false);
@@ -25,7 +26,7 @@ export default function Header() {
         <ul className={burger ? "nav-menu active" : "nav-menu"}>
           <li>
             <Link
-              to="date"
+              to="/date"
               className={pathname === "/date" ? "active-nav-item" : "nav-item"}
             >
               Date Generator
@@ -33,7 +34,7 @@ export default function Header() {
           </li>
           <li>
             <Link
-              to="contact"
+              to="/contact"
               className={
                 pathname === "/contact" ? "active-nav-item" : "nav-item"
               }
@@ -41,6 +42,41 @@ export default function Header() {
               Contact
             </Link>
           </li>
+          {authService.loggedIn() ? (
+            <li>
+              <Link
+                to="/signout"
+                className={
+                  pathname === "/signout" ? "active-nav-item" : "nav-item"
+                }
+              >
+                Sign Out
+              </Link>
+            </li>
+          ) : (
+            <>
+              <li>
+                <Link
+                  to="/signin"
+                  className={
+                    pathname === "/signin" ? "active-nav-item" : "nav-item"
+                  }
+                >
+                  Sign In
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/signup"
+                  className={
+                    pathname === "/signup" ? "active-nav-item" : "nav-item"
+                  }
+                >
+                  Sign Up
+                </Link>
+              </li>
+            </>
+          )}
         </ul>
         <div className="burger" onClick={toggleBurger}>
           {burger ? (
