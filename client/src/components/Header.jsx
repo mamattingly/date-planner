@@ -1,9 +1,7 @@
-import "../styles/HeaderStyles.css";
-
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { IoCloseOutline, IoMenuOutline } from "react-icons/io5";
-import Authservice from "../utils/auth"; 
+import Authservice from "../utils/auth";
 
 export default function Header() {
   const { pathname } = useLocation();
@@ -32,27 +30,29 @@ export default function Header() {
               Date Generator
             </Link>
           </li>
-          <li>
-            <Link
-              to="/contact"
-              className={
-                pathname === "/contact" ? "active-nav-item" : "nav-item"
-              }
-            >
-              Contact
-            </Link>
-          </li>
           {authService.loggedIn() ? (
-            <li>
-              <Link
-                to="/signout"
-                className={
-                  pathname === "/signout" ? "active-nav-item" : "nav-item"
-                }
-              >
-                Sign Out
-              </Link>
-            </li>
+            <>
+              <li>
+                <Link
+                  to="/saved-dates"
+                  className={
+                    pathname === "/saved-dates" ? "active-nav-item" : "nav-item"
+                  }
+                >
+                  Saved Dates
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/signout"
+                  className={
+                    pathname === "/signout" ? "active-nav-item" : "nav-item"
+                  }
+                >
+                  Sign Out
+                </Link>
+              </li>
+            </>
           ) : (
             <>
               <li>
@@ -77,6 +77,16 @@ export default function Header() {
               </li>
             </>
           )}
+          <li>
+            <Link
+              to="/contact"
+              className={
+                pathname === "/contact" ? "active-nav-item" : "nav-item"
+              }
+            >
+              Contact
+            </Link>
+          </li>
         </ul>
         <div className="burger" onClick={toggleBurger}>
           {burger ? (

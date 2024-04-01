@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv").config();
 
 module.exports = {
-  checkAuth: function ({ req, res, next}) {
+  checkAuth: function (req, res, next) {
     let token = req.headers.authorization || "";
 
     if (token) {
@@ -10,22 +10,26 @@ module.exports = {
     }
 
     if (!token) {
-      return req;
+      return res.status(401).json({ message: "Token not provided" });
     }
 
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
       if (decoded.exp <= Math.floor(Date.now() / 1000)) {
-        res.status(401).json({ message: "Token expired" });
+        return res.status(401).json({ message: "Token expired" });
       }
+
+      const newToken = jwt.sign({ data: decoded.data }, process.env.JWT_SECRET, {
+        expiresIn: process.env.EXPIRATION,
+      });
+
+      res.setHeader('Authorization', `Bearer ${newToken}`);
 
       req.user = decoded;
       next();
     } catch {
-      console.log("Invalid token");
+      return res.status(401).json({ message: "Invalid token" });
     }
-
-    return req;
   },
   signToken: function ({ username, email, _id }) {
     const payload = { username, email, _id };

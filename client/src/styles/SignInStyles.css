@@ -1,11 +1,4 @@
-.container {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
+
   
   .card {
     display: flex;
@@ -27,7 +20,7 @@
   .card form {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
   }
   
   .card label {
@@ -36,7 +29,6 @@
   }
   
   .card input {
-    width: 100%;
     padding: 10px;
     margin-bottom: 16px;
     border: 1px solid #ccc;
@@ -61,7 +53,23 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Adjust as needed */
-    background-color: #f1f1f1;
+    height: 100vh;
   }
   
+  .input-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .error {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  .save-date-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }

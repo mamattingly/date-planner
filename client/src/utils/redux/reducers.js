@@ -1,9 +1,10 @@
-import { SIGN_IN, SIGN_OUT } from "./actions";
+import { SIGN_IN, SIGN_OUT, UPDATE_TOKEN, SAVED_DATE } from "./actions";
 
 export const initialState = {
     LOGGED_IN: false,
     USER: null,
-    TOKEN: null
+    TOKEN: null,
+    SAVED_DATE: null
 }
 
 export const reducer = (state = initialState, action) => { 
@@ -24,6 +25,18 @@ export const reducer = (state = initialState, action) => {
                 LOGGED_IN: false,
                 USER: null,
                 TOKEN: null
+            }
+        case UPDATE_TOKEN:
+            localStorage.setItem('id_token', action.payload);
+            return {
+                ...state,
+                TOKEN: action.payload
+            }
+        case SAVED_DATE:
+            console.log("Date updated:", action.payload);
+            return {
+                ...state,
+                SAVED_DATE: action.payload
             }
         default:
             return state;

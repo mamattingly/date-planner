@@ -4,6 +4,9 @@ import Date from './pages/Date.jsx'
 import SignUp from './pages/SignUp.jsx'
 import SignOut from './pages/SignOut.jsx'
 import SignIn from './pages/SignIn.jsx'
+import SavedDates from './pages/SavedDates.jsx'
+import SavedDate from './pages/SavedDate.jsx'
+import Home from './pages/Home.jsx'
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 
@@ -13,6 +16,10 @@ const router = createBrowserRouter([
     element: <App />,
     errorElement: <h1>404</h1>,
     children: [
+      {
+        path: "",
+        element: <Home />
+      },
       {
         path: "date",
         element: <Date />
@@ -32,6 +39,14 @@ const router = createBrowserRouter([
       {
         path: "signup",
         element: <SignUp />
+      },
+      {
+        path: "saved-dates",
+        element: <SavedDates />
+      },
+      {
+        path: "saved-date",
+        element: <SavedDate />
       }
     ]
   }

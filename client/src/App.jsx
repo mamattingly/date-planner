@@ -1,4 +1,9 @@
 import "./styles/AppStyles.css";
+import "./styles/HeaderStyles.css";
+import "./styles/SignInStyles.css";
+import "./styles/DateStyles.css";
+import "./styles/SavedDatesStyles.css";
+import "./styles/HomeStyles.css";
 import { Outlet, useLocation } from "react-router-dom";
 import { Provider } from "react-redux"; // Import Provider
 import store from "./utils/redux/store";

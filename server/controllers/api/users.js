@@ -1,4 +1,5 @@
 const User = require("../../models/User");
+const auth = require("../../utils/auth");
 const router = require("express").Router();
 const authMiddleware = require("../../utils/auth");
 const validatePassword = require("../../utils/validatePassword");
@@ -64,9 +65,23 @@ router.post("/save-date", authMiddleware.checkAuth, async (req, res, next) => {
   try {
     const { name, activity, food } = req.body;
     const user = req.user;
-    user.savedDates.push({ name, activity, food });
-    await user.save();
-    res.json(user.savedDates);
+
+    const updatedToken = authMiddleware.signToken(user.data);
+    const updateUser = await User.findByIdAndUpdate(
+      user.data._id,
+      {
+        $push: {
+          savedDates: {
+            name,
+            activity,
+            food,
+          },
+        },
+      },
+      { new: true }
+    );
+    res.setHeader("Authorization", `Bearer ${updatedToken}`);
+    res.json({ savedDates: updateUser.savedDates });
   } catch (error) {
     next(error);
   }
@@ -75,12 +90,37 @@ router.post("/save-date", authMiddleware.checkAuth, async (req, res, next) => {
 router.get("/saved-dates", authMiddleware.checkAuth, async (req, res, next) => {
   try {
     const user = req.user;
-    res.json(user.savedDates);
+    const updatedToken = authMiddleware.signToken(user.data);
+    const updatedUser = await User.findById(user.data._id).populate(
+      "savedDates"
+    );
+    res.setHeader("Authorization", `Bearer ${updatedToken}`);
+    res.json({ savedDates: updatedUser.savedDates });
   } catch (error) {
     next(error);
   }
 });
 
+router.delete(
+  "/delete-date",
+  authMiddleware.checkAuth,
+  async (req, res, next) => {
+    try {
+      const { _id } = req.body;
+      const user = req.user;
+      const updatedToken = authMiddleware.signToken(user.data);
+      const updatedUser = await User.findByIdAndUpdate(
+        user.data._id,
+        { $pull: { savedDates: { _id } } },
+        { new: true }
+      );
+      res.setHeader("Authorization", `Bearer ${updatedToken}`);
+      res.json({ savedDates: updatedUser.savedDates });
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 
 router.use((err, req, res, next) => {
   console.error(err);
