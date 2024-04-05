@@ -1,104 +1,104 @@
 /* HeaderStyles.css */
 
 :root {
-  --header-height: 50px;
-  --orange: #fe944d;
-  --blue: #0199FE;
+    --header-height: 50px;
+    --orange: #fe944d;
+    --blue: #0199fe;
 }
 
 header {
-  background-color: #0199fe;
-  height: var(--header-height);
-  align-items: center;
-  padding-bottom: 0rem;
+    background-color: #0199fe;
+    height: var(--header-height);
+    align-items: center;
+    padding-bottom: 0rem;
 }
 
 main {
-  margin-top: var(--header-height);
+    margin-top: var(--header-height);
 }
 
 nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
 }
 
 nav h1 {
-  color: #fff;
-  font-size: 1.5rem;
-  padding-left: 0.5rem;
+    color: #fff;
+    font-size: 1.5rem;
+    padding-left: 0.5rem;
 }
 
 .nav-menu {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
 }
 
 .nav-item {
-  margin-right: 20px;
+    margin-right: 20px;
 }
 
 .active-nav-item {
-  color: #fff;
-  margin-right: 20px;
+    color: #fff;
+    margin-right: 20px;
 }
 
 .burger {
-  display: none; /* Hide by default */
-  padding-right: 0.5rem;
-  align-items: center;
+    display: none; /* Hide by default */
+    padding-right: 0.5rem;
+    align-items: center;
 }
 
 @media screen and (max-width: 1000px) {
-  header {
-    height: var(--header-height);
-    position: fixed;
-    width: 100%;
-    top: 0;
-    left: 0;
-    z-index: 100;
-    padding-right: 1rem;
-  }
+    header {
+        height: var(--header-height);
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+        z-index: 100;
+        padding-right: 1rem;
+    }
 
-  header h1.active {
-    color: #3a2e39;
-  }
+    header h1.active {
+        color: #3a2e39;
+    }
 
-  .nav-menu {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: calc(100vh - var(--header-height)); /* Subtract header height */
-    position: absolute;
-    top: var(--header-height); /* Use CSS variable for header height */
-    left: -100%;
-    z-index: 100;
-    transition: all 0.5s ease;
-  }
+    .nav-menu {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: calc(100vh - var(--header-height)); /* Subtract header height */
+        position: absolute;
+        top: var(--header-height); /* Use CSS variable for header height */
+        left: -100%;
+        z-index: 100;
+        transition: all 0.5s ease;
+    }
 
-  .nav-menu.active {
-    background: var(--orange);
-    left: 0;
-    transition: all 0.5s ease;
-  }
+    .nav-menu.active {
+        background: var(--orange);
+        left: 0;
+        transition: all 0.5s ease;
+    }
 
-  .nav-menu li a {
-    font-size: 1.5rem;
-    color: black;
-  }
+    .nav-menu li a {
+        font-size: 1.5rem;
+        color: black;
+    }
 
-  .burger {
-    display: initial;
-    display: flex; /* Use flexbox */
-    justify-content: center; /* Center content horizontally */
-    align-items: center;
-  }
+    .burger {
+        display: initial;
+        display: flex; /* Use flexbox */
+        justify-content: center; /* Center content horizontally */
+        align-items: center;
+    }
 
-  .nav-title h1 {
-    font-size: 1.5rem;
-  }
+    .nav-title h1 {
+        font-size: 1.5rem;
+    }
 }

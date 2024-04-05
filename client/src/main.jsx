@@ -1,12 +1,13 @@
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
-import Date from './pages/Date.jsx'
+import DateComponent from './pages/Date.jsx'
 import SignUp from './pages/SignUp.jsx'
 import SignOut from './pages/SignOut.jsx'
 import SignIn from './pages/SignIn.jsx'
 import SavedDates from './pages/SavedDates.jsx'
 import SavedDate from './pages/SavedDate.jsx'
 import Home from './pages/Home.jsx'
+import History from './pages/History.jsx'
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 
@@ -22,7 +23,7 @@ const router = createBrowserRouter([
       },
       {
         path: "date",
-        element: <Date />
+        element: <DateComponent />
       },
       {
         path: "contact",
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
       {
         path: "saved-date",
         element: <SavedDate />
+      },
+      {
+        path: "history",
+        element: <h1>History</h1>
       }
     ]
   }

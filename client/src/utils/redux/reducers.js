@@ -27,10 +27,11 @@ export const reducer = (state = initialState, action) => {
                 TOKEN: null
             }
         case UPDATE_TOKEN:
-            localStorage.setItem('id_token', action.payload);
+            const token = action.payload.split(' ').pop().trim();   
+            localStorage.setItem('id_token', token);
             return {
                 ...state,
-                TOKEN: action.payload
+                TOKEN: token
             }
         case SAVED_DATE:
             console.log("Date updated:", action.payload);

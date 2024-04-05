@@ -23,11 +23,17 @@ const dateSchema = new mongoose.Schema({
     food: foodSchema,
 });
 
+const historySchema = new mongoose.Schema({
+    eventId: { type: String, required: true },
+    count: { type: Number, required: true }
+});
+
 const userSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     createdAt: { type: Date, default: Date.now },
-    savedDates: [dateSchema]
+    savedDates: [dateSchema],
+    history: [historySchema]
 });
 
 userSchema.pre('save', async function(next) {
